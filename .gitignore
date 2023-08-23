@@ -55,6 +55,7 @@ tsconfig.tsbuildinfo
 __*test.ts
 .local
 *.js.map
-!/projects/utx-web/src/**/*.js
+!/apps/admin-web/src/**/*.js
+!/apps/client-web/src/**/*.js
 devtools/infrastructure/data
 .nx-container
