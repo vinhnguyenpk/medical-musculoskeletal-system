@@ -5,10 +5,10 @@ export class Musculoskeletal {
   @PrimaryColumn("uuid")
   id: string;
 
-  @Column({ name: "name", type: "string" })
+  @Column({ name: "name", type: "text" })
   name: string;
 
-  @Column({ name: "type", type: "string" })
+  @Column({ name: "type", type: "text" })
   type: string;
 
   @Column({

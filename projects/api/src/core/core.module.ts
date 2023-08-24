@@ -1,5 +1,4 @@
 import { Global, Module, OnModuleInit } from "@nestjs/common";
-import assert from "assert";
 import { DatabaseModule } from "../database/database.module";
 
 @Global()
@@ -9,6 +8,6 @@ import { DatabaseModule } from "../database/database.module";
 })
 export class CoreModule implements OnModuleInit {
   onModuleInit() {
-    assert(process.env.REDIS_URL, "REDIS_URL is not set");
+    // assert(process.env.REDIS_URL, "REDIS_URL is not set");
   }
 }
