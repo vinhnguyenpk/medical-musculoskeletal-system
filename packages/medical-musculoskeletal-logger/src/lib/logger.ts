@@ -1,6 +1,6 @@
+import { ContextManager } from "@medical-musculoskeletal/context";
 import pino from "pino";
 import "pino-pretty";
-import { ContextManager } from "./context-manager";
 
 const PinoLevelToSeverityLookup = {
   trace: "DEBUG",

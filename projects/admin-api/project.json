@@ -1,0 +1,57 @@
+{
+  "name": "admin-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/admin-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "compiler": "tsc",
+        "target": "node",
+        "outputPath": "dist/projects/admin-api",
+        "main": "projects/admin-api/src/main.ts",
+        "tsConfig": "projects/admin-api/tsconfig.app.json",
+        "assets": [],
+        "webpackConfig": "projects/admin-api/webpack.config.js",
+        "isolatedConfig": true,
+        "babelUpwardRootMode": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "admin-api:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "admin-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["projects/admin-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/projects/admin-api"],
+      "options": {
+        "jestConfig": "projects/admin-api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

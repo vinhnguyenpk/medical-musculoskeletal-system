@@ -1,28 +1,38 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "medical-musculoskeletal-system",
+  "npmScope": "api",
   "tasksRunnerOptions": {
-    "default": {
+    "nx-cloud": {
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "OTY2MDg2YjAtNmU5YS00YmUwLTg1ZTItNjQwZDk3MTljZWYzfHJlYWQtd3JpdGU="
       }
+    },
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "parallel": 8,
+        "cacheableOperations": ["build", "test", "lint"]
+      }
     }
   },
   "targetDefaults": {
     "build": {
+      "inputs": ["production", "^production", { "env": "NODE_ENV" }],
       "dependsOn": ["^build"]
     },
-    "test": {
-      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"]
+    "docker": {
+      "dependsOn": ["build"]
+    },
+    "prepare": {
+      "dependsOn": ["^prepare"]
     },
     "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore"
-      ]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.js"]
+    },
+    "test": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     }
   },
   "generators": {
@@ -41,5 +51,51 @@
         "linter": "eslint"
       }
     }
+  },
+  "affected": {
+    "defaultBase": "development"
+  },
+  "namedInputs": {
+    "sharedGlobals": ["{workspaceRoot}/yarn.lock"],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/*.spec.ts",
+      "!{projectRoot}/**/*.md",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.ts",
+      "!{projectRoot}/.eslintrc.json"
+    ]
+  },
+  "defaultProject": "api",
+  "pluginsConfig": {
+    "@nrwl/js": {
+      "analyzeSourceFiles": true
+    }
+  },
+  "extends": "nx/presets/npm.json",
+  "workspaceLayout": {
+    "appsDir": "projects",
+    "libsDir": "packages"
+  },
+
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "yarn.lock": "*",
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }
