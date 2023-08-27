@@ -1,5 +1,6 @@
 -- Create extentions auto create uuid v4
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- Create table category
 drop table if exists category;
 create table if not exists category (
@@ -8,6 +9,7 @@ create table if not exists category (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
+
 -- Create table story
 drop table if exists story;
 CREATE TABLE if not exists story (
@@ -18,6 +20,7 @@ CREATE TABLE if not exists story (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
+
 -- Seed data sample category
 insert into category(id, name) values ('ed6eb28d-696c-40ef-a580-28257c8bf042','Cổ');
 insert into category(id, name) values ('6e19f895-0906-4f28-97f3-732ab7f4c80a','Vai');
@@ -27,6 +30,7 @@ insert into category(id, name) values ('72d26dac-951c-4c1c-a6db-3e49dbc9d3c6','C
 insert into category(id, name) values ('e56388f9-ccf4-4ea2-b3c8-dedbe0b16be6','Eo');
 insert into category(id, name) values ('5f11463d-c23b-4e0c-bb87-53c0cd864e02','Xương Sống');
 insert into category(id, name) values ('4be6353a-1908-40eb-88f9-f9143dbf42f0','Thắt Lưng');
+
 -- Seed data sample story
 insert into story(keywords, content, category_id) values('Đau Cổ', 'Trị Đau Cổ', 'ed6eb28d-696c-40ef-a580-28257c8bf042');
 insert into story(keywords, content, category_id) values('Đau Vai', 'Trị Đau Vai', '6e19f895-0906-4f28-97f3-732ab7f4c80a');
@@ -36,6 +40,7 @@ insert into story(keywords, content, category_id) values('Đau Chân', 'Trị Đ
 insert into story(keywords, content, category_id) values('Đau Eo', 'Trị Đau Eo', 'e56388f9-ccf4-4ea2-b3c8-dedbe0b16be6');
 insert into story(keywords, content, category_id) values('Đau Xương Sống', 'Trị Đau Xương Sống', '5f11463d-c23b-4e0c-bb87-53c0cd864e02');
 insert into story(keywords, content, category_id) values('Đau Thắt Lưng', 'Trị Đau Thắt Lưng', '4be6353a-1908-40eb-88f9-f9143dbf42f0');
+
 -- Sample Query for get all
 select *
 from story s

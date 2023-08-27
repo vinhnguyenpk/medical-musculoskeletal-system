@@ -57,6 +57,16 @@
           "codeCoverage": true
         }
       }
+    },
+    "docker": {
+      "executor": "@nx-tools/nx-container:build",
+      "inputs": [
+        "{workspaceRoot}/packages/*-db/**/*",
+        "{workspaceRoot}/dist/projects/api/**/*"
+      ],
+      "options": {
+        "tags": ["${IMAGE_PREFIX}api:${IMAGE_TAG}"]
+      }
     }
   },
   "tags": []

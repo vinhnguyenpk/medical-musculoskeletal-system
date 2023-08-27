@@ -1,0 +1,30 @@
+{
+  "name": "medical-musculoskeletal-db",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/medical-musculoskeletal-db",
+  "projectType": "library",
+  "targets": {
+    "db:new": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "./packages/medical-musculoskeletal-db",
+        "command": "dbmate new"
+      }
+    },
+    "db:up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "./packages/medical-musculoskeletal-db",
+        "command": "dbmate up"
+      }
+    },
+    "db:down": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "./packages/medical-musculoskeletal-db",
+        "command": "dbmate down"
+      }
+    }
+  },
+  "tags": ["db"]
+}
