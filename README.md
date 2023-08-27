@@ -15,3 +15,39 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+
+Directory Structure
+
+```
+├── dist                <-- build artifacts
+├── node_modules        <-- hoisted node_modules
+├── nx.json             <-- nx configuration
+├── package.json        <-- global package.json
+├── apps                <-- web/mobile apps
+├── packages            <-- shared packages
+├── projects            <-- backend projects
+├── README.md
+├── tools               <-- tools for monorepo managment
+├── tsconfig.base.json  <-- base tsconfig
+```
+
+## Tools
+
+- NX: https://nx.dev/
+- Yarn: https://classic.yarnpkg.com/
+- dbmate: https://github.com/amacneil/dbmate
+
+## Stack
+
+- Postgres
+- NodeJS 16.x
+- Redis
+- Rabbitmq (with delayed message queue)
+
+## Setup
+
+Install required tools
+```
+npm install -g nx
+```
