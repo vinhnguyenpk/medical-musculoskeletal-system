@@ -1,5 +1,5 @@
 import { Controller, Get, HttpException, Param, Query } from "@nestjs/common";
-import { ApiBearerAuth, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { exceptions } from "../lib/logger";
 import { MusculoskeletalService } from "../musculoskeletal/musculoskeletal.service";
 
@@ -34,7 +34,7 @@ export class AdminMusculoskeletalController {
   }
 
   @Get("/:id")
-  @ApiQuery({ name: "id", description: "Musculoskeletal Id", required: true })
+  @ApiParam({ name: "id", description: "Musculoskeletal Id", required: true })
   //   @ApiOkResponse({
   //     description: 'Get Musculoskeletal',
   //     type: any
