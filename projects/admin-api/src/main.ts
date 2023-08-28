@@ -19,27 +19,27 @@
 
 // bootstrap();
 
-import "@/common-init";
-import "multer";
+import '@/common-init';
+import 'multer';
 
-import { HttpRequestIdMiddleware } from "@/http-x-request-id.middleware";
+import { HttpRequestIdMiddleware } from '@/http-x-request-id.middleware';
 
-import { Logger } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
-import { NestExpressApplication } from "@nestjs/platform-express";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import * as Sentry from "@sentry/node";
-import helmet from "helmet";
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as Sentry from '@sentry/node';
+import helmet from 'helmet';
 
-import { AdminAPIModule } from "@/admin-api/admin-api.module";
+import { AdminAPIModule } from '@/admin-api/admin-api.module';
 
-import { LoggerService } from "@medical-musculoskeletal/logger";
-import { WsAdapter } from "@nestjs/platform-ws";
+import { LoggerService } from '@medical-musculoskeletal/logger';
+import { WsAdapter } from '@nestjs/platform-ws';
 
 export async function bootstrap() {
-  const port = Number(process.env.PORT || "50100");
+  const port = Number(process.env.PORT || '50100');
   const app = await NestFactory.create<NestExpressApplication>(AdminAPIModule, {
-    logger: new LoggerService(),
+    logger: new LoggerService()
   });
   app.useWebSocketAdapter(new WsAdapter(app));
   const expressApp = app.getHttpAdapter().getInstance();
@@ -51,39 +51,33 @@ export async function bootstrap() {
 
   app.enableShutdownHooks();
   app.use(HttpRequestIdMiddleware());
-  app.set("etag", false);
+  app.set('etag', false);
   app.use(helmet());
-  app.disable("x-powered-by");
+  app.disable('x-powered-by');
   app.enableCors({
     maxAge: 7200,
-    origin: process.env.CORS_ORIGIN
-      ? JSON.parse(process.env.CORS_ORIGIN)
-      : "http://localhost:6000",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: process.env.CORS_ORIGIN ? JSON.parse(process.env.CORS_ORIGIN) : 'http://localhost:8000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204,
     credentials: true,
-    exposedHeaders: ["AUTHORIZATION", "X-REQUEST-ID"],
+    exposedHeaders: ['AUTHORIZATION', 'X-REQUEST-ID']
   });
 
   // const adminAuthGuard = app.get(AdminAuthGuard);
 
-  app.set("trust proxy", true);
-  app.set("etag", false);
+  app.set('trust proxy', true);
+  app.set('etag', false);
   app.use(helmet());
   // app.useGlobalGuards(adminAuthGuard);
 
-  if (process.env.NODE_ENV !== "production") {
-    const options = new DocumentBuilder()
-      .setTitle("AW Admin API")
-      .setVersion("1.0")
-      .addBearerAuth()
-      .build();
+  if (process.env.NODE_ENV !== 'production') {
+    const options = new DocumentBuilder().setTitle('AW Admin API').setVersion('1.0').addBearerAuth().build();
     // patchNestjsSwagger();
     const document = SwaggerModule.createDocument(app, options, {
-      deepScanRoutes: true,
+      deepScanRoutes: true
     });
-    SwaggerModule.setup("docs", app, document);
+    SwaggerModule.setup('docs', app, document);
   }
 
   await app.listen(port);
