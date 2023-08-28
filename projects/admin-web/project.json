@@ -2,89 +2,63 @@
   "name": "admin-web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "projects/admin-web/src",
-  "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "@nrwl/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+    "setup": {
+      "executor": "nx:run-commands",
+      "inputs": ["{projectRoot}/package.json", "{projectRoot}/package-lock.json"],
+      "outputs": ["{projectRoot}/node_modules"],
       "options": {
-        "compiler": "babel",
-        "outputPath": "dist/projects/admin-web",
-        "index": "projects/admin-web/src/index.html",
-        "baseHref": "/",
-        "main": "projects/admin-web/src/main.tsx",
-        "tsConfig": "projects/admin-web/tsconfig.app.json",
-        "assets": [
-          "projects/admin-web/src/favicon.ico",
-          "projects/admin-web/src/assets"
-        ],
-        "styles": ["projects/admin-web/src/styles.less"],
-        "scripts": [],
-        "isolatedConfig": true,
-        "webpackConfig": "projects/admin-web/webpack.config.js"
-      },
-      "configurations": {
-        "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
-        "production": {
-          "fileReplacements": [
-            {
-              "replace": "projects/admin-web/src/environments/environment.ts",
-              "with": "projects/admin-web/src/environments/environment.prod.ts"
-            }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
-        }
+        "cwd": "projects/admin-web",
+        "command": "npm install"
       }
     },
     "serve": {
-      "executor": "@nrwl/webpack:dev-server",
-      "defaultConfiguration": "development",
+      "executor": "nx:run-script",
       "options": {
-        "buildTarget": "admin-web:build",
-        "hmr": true
+        "script": "start:dev"
+      }
+    },
+    "build": {
+      "executor": "nx:run-script",
+      "inputs": ["{projectRoot}/**", "!{projectRoot}/build/**"],
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "script": "build"
+      }
+    },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run admin-web:docker-build -c an"
+          },
+          {
+            "command": "nx run admin-web:docker-build -c other"
+          }
+        ],
+        "parallel": false
+      }
+    },
+    "docker-build": {
+      "executor": "@nx-tools/nx-container:build",
+      "options": {
+        "context": "projects/admin-web",
+        "file": "projects/admin-web/Dockerfile",
+        "build-args": ["VENDOR=unitrust"],
+        "tags": ["${IMAGE_PREFIX}admin-web:${IMAGE_TAG}"],
+        "push": false
       },
       "configurations": {
-        "development": {
-          "buildTarget": "admin-web:build:development"
+        "an": {
+          "build-args": ["BRAND=an", "NPM_TOKEN=${NPM_TOKEN}"],
+          "tags": ["${IMAGE_PREFIX}admin-web-an:${IMAGE_TAG}"]
         },
-        "production": {
-          "buildTarget": "admin-web:build:production",
-          "hmr": false
-        }
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["projects/admin-web/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "projects/admin-web/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
+        "other": {
+          "build-args": ["BRAND=other", "NPM_TOKEN=${NPM_TOKEN}"],
+          "tags": ["${IMAGE_PREFIX}admin-web-other:${IMAGE_TAG}"]
         }
       }
     }
-  },
-  "tags": []
+  }
 }

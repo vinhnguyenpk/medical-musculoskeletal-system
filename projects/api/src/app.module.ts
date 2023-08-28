@@ -1,17 +1,22 @@
+import { ContextMiddleware } from "@medical-musculoskeletal/context";
+import { LoggerMiddleware } from "@medical-musculoskeletal/logger";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { CoreModule } from "./core/core.module";
 import { HttpRequestIdMiddleware } from "./http-x-request-id.middleware";
-import { ContextMiddleware } from "./lib/context-middleware";
-import { LoggerMiddleware } from "./lib/logger.middleware";
-import { MusculoskeletalAdminApiModule } from "./musculoskeletal-admin-api/musculoskeletal-admin.module";
 import { MusculoskeletalApiModule } from "./musculoskeletal-api/musculoskeletal.module";
+import { CategoryAdminApiModule } from "./category-admin-api/category-admin.module";
+import { CategoryApiModule } from "./category-api/category.module";
+import { StoryAdminApiModule } from "./story-admin-api/story-admin.module";
+import { StoryApiModule } from "./story-api/story.module";
+import { MusculoskeletalAdminApiModule } from "./musculoskeletal-admin-api/musculoskeletal-admin.module";
 
 @Module({
   imports: [
     CoreModule,
-    MusculoskeletalAdminApiModule,
     MusculoskeletalApiModule,
+    CategoryApiModule,
+    StoryApiModule,
   ],
   controllers: [AppController],
   providers: [

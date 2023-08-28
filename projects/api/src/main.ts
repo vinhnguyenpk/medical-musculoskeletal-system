@@ -19,10 +19,9 @@ import helmet from "helmet";
 import { AppModule } from "./app.module";
 import { GlobalExceptionFilter } from "./http-exception.filter";
 
+import { LoggerService, logger } from "@medical-musculoskeletal/logger";
 import express from "express";
 import { upperFirst } from "lodash";
-import { logger } from "./lib/logger";
-import { LoggerService } from "./lib/logger.service";
 import { initSentry } from "./sentry/sentry";
 
 export async function bootstrap() {
@@ -66,7 +65,7 @@ export async function bootstrap() {
     maxAge: 86400, // 24h
     origin: process.env.CORS_ORIGIN
       ? JSON.parse(process.env.CORS_ORIGIN)
-      : "http://localhost:41100",
+      : "http://localhost:51100",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,

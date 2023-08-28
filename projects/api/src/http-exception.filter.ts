@@ -1,3 +1,4 @@
+import { logger } from "@medical-musculoskeletal/logger";
 import {
   ArgumentsHost,
   BadRequestException,
@@ -12,7 +13,6 @@ import {
 import { BaseExceptionFilter } from "@nestjs/core";
 import { ThrottlerException } from "@nestjs/throttler";
 import { Request, Response } from "express";
-import { logger } from "./lib/logger";
 
 @Catch()
 export class GlobalExceptionFilter extends BaseExceptionFilter {
