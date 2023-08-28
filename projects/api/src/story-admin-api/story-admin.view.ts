@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class AdminCreatePostParams {
+export class AdminCreateStoryParams {
   @ApiProperty({ required: false })
   keywords: string;
 
@@ -11,7 +11,7 @@ export class AdminCreatePostParams {
   categoryId: string;
 }
 
-export class AdminCreatePostResponse {
+export class AdminCreateStoryResponse {
   @ApiProperty()
   id: string;
 
@@ -31,7 +31,7 @@ export class AdminCreatePostResponse {
   updatedAt: Date;
 }
 
-export class AdminUpdatePostParams {
+export class AdminUpdateStoryParams {
   @ApiProperty({ required: false })
   keywords: string;
 
@@ -42,7 +42,7 @@ export class AdminUpdatePostParams {
   categoryId: string;
 }
 
-export class AdminUpdatePostResponse {
+export class AdminUpdateStoryResponse {
   @ApiProperty()
   id: string;
 
@@ -62,7 +62,7 @@ export class AdminUpdatePostResponse {
   updatedAt: Date;
 }
 
-export class AdminGetPostRequest {
+export class AdminGetStoryRequest {
   @ApiProperty()
   categoryId?: string;
 
@@ -79,7 +79,7 @@ export class AdminGetPostRequest {
   pageSize?: number;
 }
 
-export class AdminGetPostResponse {
+export class AdminGetStoryResponse {
   @ApiProperty()
   id: string;
 

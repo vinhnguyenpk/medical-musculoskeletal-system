@@ -16,22 +16,22 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import {
-  AdminCreatePostParams,
-  AdminCreatePostResponse,
-  AdminGetPostRequest,
-  AdminGetPostResponse,
-  AdminUpdatePostParams,
-  AdminUpdatePostResponse,
-} from "./post-admin.view";
+  AdminCreateStoryParams,
+  AdminCreateStoryResponse,
+  AdminGetStoryRequest,
+  AdminGetStoryResponse,
+  AdminUpdateStoryParams,
+  AdminUpdateStoryResponse,
+} from "./story-admin.view";
 import { PaginatedList } from "../pagination/types";
-import { PostService } from "../posts/post.service";
+import { StoryService } from "../story/story.service";
 import { exceptions } from "packages/medical-musculoskeletal-logger/src/lib/logger";
 
-@ApiTags("Post")
-@Controller("/post")
+@ApiTags("Story")
+@Controller("/story")
 @ApiBearerAuth()
-export class AdminPostController {
-  constructor(private readonly postService: PostService) {}
+export class AdminStoryController {
+  constructor(private readonly storyService: StoryService) {}
 
   @Get("/")
   @ApiQuery({
@@ -65,9 +65,9 @@ export class AdminPostController {
     type: String,
   })
   public async getAll(
-    @Query() request: AdminGetPostRequest
-  ): Promise<PaginatedList<AdminGetPostResponse>> {
-    const data = await this.postService.getAll(request);
+    @Query() request: AdminGetStoryRequest
+  ): Promise<PaginatedList<AdminGetStoryResponse>> {
+    const data = await this.storyService.getAll(request);
     return {
       data: data.data.map((m) => {
         return {
@@ -84,18 +84,18 @@ export class AdminPostController {
   }
 
   @Get("/:id")
-  @ApiParam({ name: "id", description: "Post Id", required: true })
+  @ApiParam({ name: "id", description: "Story Id", required: true })
   @ApiOkResponse({
-    description: "Get Post By Id",
-    type: AdminGetPostResponse,
+    description: "Get Story By Id",
+    type: AdminGetStoryResponse,
   })
-  public async getPostById(
+  public async getStoryById(
     @Param("id") id: string
-  ): Promise<AdminGetPostResponse> {
+  ): Promise<AdminGetStoryResponse> {
     try {
-      const data = await this.postService.getById(id);
+      const data = await this.storyService.getById(id);
       if (!data) {
-        throw new NotFoundException("Post not found");
+        throw new NotFoundException("Story not found");
       }
 
       return {
@@ -107,32 +107,32 @@ export class AdminPostController {
         updatedAt: data.updatedAt,
       };
     } catch (e) {
-      const ex = exceptions("[Get Post error]", e);
+      const ex = exceptions("[Get Story error]", e);
       throw new HttpException(ex.message, ex.statusCode);
     }
   }
 
   @Post("/create")
-  async createPost(
-    @Body() params: AdminCreatePostParams
-  ): Promise<AdminCreatePostResponse> {
+  async createStory(
+    @Body() params: AdminCreateStoryParams
+  ): Promise<AdminCreateStoryResponse> {
     try {
-      return await this.postService.createPost(params);
+      return await this.storyService.createStory(params);
     } catch (e) {
-      const ex = exceptions("[Create Post error]", e);
+      const ex = exceptions("[Create Story error]", e);
       throw new HttpException(ex.message, ex.statusCode);
     }
   }
 
   @Post("/:id/edit")
-  async updatePost(
+  async updateStory(
     @Param("id") id: string,
-    @Body() params: AdminUpdatePostParams
-  ): Promise<AdminUpdatePostResponse> {
+    @Body() params: AdminUpdateStoryParams
+  ): Promise<AdminUpdateStoryResponse> {
     try {
-      return await this.postService.updatePost(id, params);
+      return await this.storyService.updateStory(id, params);
     } catch (e) {
-      const ex = exceptions("[Update Post error]", e);
+      const ex = exceptions("[Update Story error]", e);
       throw new HttpException(ex.message, ex.statusCode);
     }
   }

@@ -1,4 +1,4 @@
-export interface PostDto {
+export interface StoryDto {
   id: string;
   keywords: string;
   content: string;
@@ -7,19 +7,19 @@ export interface PostDto {
   updatedAt: Date;
 }
 
-export interface CreatePostParams {
+export interface CreateStoryParams {
   keywords: string;
   content: string;
   categoryId: string;
 }
 
-export class UpdatePostParams {
+export class UpdateStoryParams {
   keywords: string;
   content: string;
   categoryId: string;
 }
 
-export class GetPostParams {
+export class GetStoryParams {
   keywords?: string;
   content?: string;
   categoryId?: string;

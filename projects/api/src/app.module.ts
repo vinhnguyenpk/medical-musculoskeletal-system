@@ -7,8 +7,8 @@ import { HttpRequestIdMiddleware } from "./http-x-request-id.middleware";
 import { MusculoskeletalApiModule } from "./musculoskeletal-api/musculoskeletal.module";
 import { CategoryAdminApiModule } from "./category-admin-api/category-admin.module";
 import { CategoryApiModule } from "./category-api/category.module";
-import { PostAdminApiModule } from "./posts-admin-api/post-admin.module";
-import { PostApiModule } from "./posts-api/post.module";
+import { StoryAdminApiModule } from "./story-admin-api/story-admin.module";
+import { StoryApiModule } from "./story-api/story.module";
 import { MusculoskeletalAdminApiModule } from "./musculoskeletal-admin-api/musculoskeletal-admin.module";
 
 @Module({
@@ -16,7 +16,7 @@ import { MusculoskeletalAdminApiModule } from "./musculoskeletal-admin-api/muscu
     CoreModule,
     MusculoskeletalApiModule,
     CategoryApiModule,
-    PostApiModule,
+    StoryApiModule,
   ],
   controllers: [AppController],
   providers: [

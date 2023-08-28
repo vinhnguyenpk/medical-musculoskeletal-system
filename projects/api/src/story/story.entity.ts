@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity("story")
-export class Post {
+export class Story {
   @PrimaryColumn("uuid")
   id: string;
 
