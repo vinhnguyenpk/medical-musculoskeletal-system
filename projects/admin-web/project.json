@@ -1,0 +1,64 @@
+{
+  "name": "admin-web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/admin-web/src",
+  "targets": {
+    "setup": {
+      "executor": "nx:run-commands",
+      "inputs": ["{projectRoot}/package.json", "{projectRoot}/package-lock.json"],
+      "outputs": ["{projectRoot}/node_modules"],
+      "options": {
+        "cwd": "projects/admin-web",
+        "command": "npm install"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "start:dev"
+      }
+    },
+    "build": {
+      "executor": "nx:run-script",
+      "inputs": ["{projectRoot}/**", "!{projectRoot}/build/**"],
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "script": "build"
+      }
+    },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run admin-web:docker-build -c an"
+          },
+          {
+            "command": "nx run admin-web:docker-build -c other"
+          }
+        ],
+        "parallel": false
+      }
+    },
+    "docker-build": {
+      "executor": "@nx-tools/nx-container:build",
+      "options": {
+        "context": "projects/admin-web",
+        "file": "projects/admin-web/Dockerfile",
+        "build-args": ["VENDOR=unitrust"],
+        "tags": ["${IMAGE_PREFIX}admin-web:${IMAGE_TAG}"],
+        "push": false
+      },
+      "configurations": {
+        "an": {
+          "build-args": ["BRAND=an", "NPM_TOKEN=${NPM_TOKEN}"],
+          "tags": ["${IMAGE_PREFIX}admin-web-an:${IMAGE_TAG}"]
+        },
+        "other": {
+          "build-args": ["BRAND=other", "NPM_TOKEN=${NPM_TOKEN}"],
+          "tags": ["${IMAGE_PREFIX}admin-web-other:${IMAGE_TAG}"]
+        }
+      }
+    }
+  }
+}
