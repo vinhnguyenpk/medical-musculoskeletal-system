@@ -6,11 +6,11 @@ import { LoggerMiddleware } from "@medical-musculoskeletal/logger";
 import { Global, MiddlewareConsumer, Module } from "@nestjs/common";
 import { AdminApiController } from "./admin-api.controller";
 import { CategoryAdminApiModule } from "@/category-admin-api/category-admin.module";
-import { PostAdminApiModule } from "@/posts-admin-api/post-admin.module";
+import { StoryAdminApiModule } from "@/story-admin-api/story-admin.module";
 import { AdminCategoryController } from "@/category-admin-api/category-admin.controller";
-import { AdminPostController } from "@/posts-admin-api/post-admin.controller";
+import { AdminStoryController } from "@/story-admin-api/story-admin.controller";
 import { CategoryModule } from "@/category/category.module";
-import { PostModule } from "@/posts/post.module";
+import { StoryModule } from "@/story/story.module";
 
 @Global()
 @Module({
@@ -19,15 +19,15 @@ import { PostModule } from "@/posts/post.module";
     MusculoskeletalAdminApiModule,
     MusculoskeletalModule,
     CategoryAdminApiModule,
-    PostAdminApiModule,
+    StoryAdminApiModule,
     CategoryModule,
-    PostModule,
+    StoryModule,
   ],
   controllers: [
     AdminApiController,
     AdminMusculoskeletalController,
     AdminCategoryController,
-    AdminPostController,
+    AdminStoryController,
   ],
   providers: [
     // {

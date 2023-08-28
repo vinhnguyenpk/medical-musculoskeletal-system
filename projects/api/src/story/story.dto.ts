@@ -1,25 +1,27 @@
-export interface PostDto {
+import { Category } from "@/category/category.entity";
+
+export interface StoryDto {
   id: string;
   keywords: string;
   content: string;
-  categoryId: string;
+  category: Category;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface CreatePostParams {
+export interface CreateStoryParams {
   keywords: string;
   content: string;
   categoryId: string;
 }
 
-export class UpdatePostParams {
+export class UpdateStoryParams {
   keywords: string;
   content: string;
   categoryId: string;
 }
 
-export class GetPostParams {
+export class GetStoryParams {
   keywords?: string;
   content?: string;
   categoryId?: string;
