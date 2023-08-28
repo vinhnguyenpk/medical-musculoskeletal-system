@@ -1,3 +1,4 @@
+import { Category } from "@/category/category.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class AdminCreateStoryParams {
@@ -84,7 +85,7 @@ export class AdminGetStoryResponse {
   id: string;
 
   @ApiProperty()
-  categoryId: string;
+  category: Category;
 
   @ApiProperty()
   keywords: string;

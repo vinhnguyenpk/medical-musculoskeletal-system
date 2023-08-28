@@ -25,7 +25,10 @@ export class StoryService {
   public async getAll(
     request: GetStoryParams
   ): Promise<PaginatedList<StoryDto>> {
-    const query = this.storyRepo.createQueryBuilder("c");
+    const query = this.storyRepo
+      .createQueryBuilder("c")
+      .leftJoinAndSelect("c.category", "ca");
+
     if (request.keywords) {
       query.andWhere("c.keywords LIKE :keywords", {
         keywords: `%${request.keywords}%`,
@@ -43,14 +46,41 @@ export class StoryService {
         categoryId: request.categoryId,
       });
     }
-    return await paginate(query, {
+    const { data, total } = await paginate(query, {
       current: request.current,
       pageSize: request.pageSize,
     });
+
+    console.log("Data", data);
+
+    return {
+      data: data.map((m) => {
+        return {
+          id: m.id,
+          keywords: m.keywords,
+          content: m.content,
+          category: m.category,
+          createdAt: m.createdAt,
+          updatedAt: m.updatedAt,
+        };
+      }),
+      total,
+    };
   }
 
   public async getById(id: string): Promise<StoryDto> {
-    return this.storyRepo.findOne({ where: { id } });
+    const story = await this.storyRepo.findOne({
+      where: { id },
+      relations: ["category"],
+    });
+    return {
+      id: story.id,
+      keywords: story.keywords,
+      content: story.content,
+      category: story.category,
+      createdAt: story.createdAt,
+      updatedAt: story.updatedAt,
+    };
   }
 
   public async createStory(params: CreateStoryParams): Promise<Story> {

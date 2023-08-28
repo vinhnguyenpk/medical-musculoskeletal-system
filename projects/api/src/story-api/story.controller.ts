@@ -41,19 +41,6 @@ export class StoryController {
   public async getAll(
     @Query() request: GetStoryRequest
   ): Promise<PaginatedList<GetStoryResponse>> {
-    const data = await this.storyService.getAll(request);
-    return {
-      data: data.data.map((m) => {
-        return {
-          id: m.id,
-          content: m.content,
-          keywords: m.keywords,
-          categoryId: m.categoryId,
-          createdAt: m.createdAt,
-          updatedAt: m.updatedAt,
-        };
-      }),
-      total: data.total,
-    };
+    return await this.storyService.getAll(request);
   }
 }

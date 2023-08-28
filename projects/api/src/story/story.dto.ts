@@ -1,8 +1,10 @@
+import { Category } from "@/category/category.entity";
+
 export interface StoryDto {
   id: string;
   keywords: string;
   content: string;
-  categoryId: string;
+  category: Category;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -67,20 +67,7 @@ export class AdminStoryController {
   public async getAll(
     @Query() request: AdminGetStoryRequest
   ): Promise<PaginatedList<AdminGetStoryResponse>> {
-    const data = await this.storyService.getAll(request);
-    return {
-      data: data.data.map((m) => {
-        return {
-          id: m.id,
-          content: m.content,
-          keywords: m.keywords,
-          categoryId: m.categoryId,
-          createdAt: m.createdAt,
-          updatedAt: m.updatedAt,
-        };
-      }),
-      total: data.total,
-    };
+    return await this.storyService.getAll(request);
   }
 
   @Get("/:id")
@@ -98,14 +85,7 @@ export class AdminStoryController {
         throw new NotFoundException("Story not found");
       }
 
-      return {
-        id: data.id,
-        content: data.content,
-        keywords: data.keywords,
-        categoryId: data.categoryId,
-        createdAt: data.createdAt,
-        updatedAt: data.updatedAt,
-      };
+      return data;
     } catch (e) {
       const ex = exceptions("[Get Story error]", e);
       throw new HttpException(ex.message, ex.statusCode);

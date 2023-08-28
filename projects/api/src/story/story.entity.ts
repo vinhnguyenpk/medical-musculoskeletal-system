@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Category } from "@/category/category.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 
 @Entity("story")
 export class Story {
@@ -13,6 +14,13 @@ export class Story {
 
   @Column({ name: "category_id", type: "uuid" })
   categoryId: string;
+
+  @ManyToOne((type) => Category, { nullable: true, eager: false })
+  @JoinColumn({
+    name: "category_id",
+    referencedColumnName: "id",
+  })
+  category?: Category;
 
   @Column({
     name: "created_at",
