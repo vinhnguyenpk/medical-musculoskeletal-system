@@ -1,4 +1,4 @@
-# utx-logger
+# medical-musculoskeletal-logger
 
 This library was generated with [Nx](https://nx.dev).
 
@@ -8,6 +8,6 @@ This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
 
-Run `nx test utx-logger` to execute the unit tests via [Jest](https://jestjs.io).
+Run `nx test medical-musculoskeletal-logger` to execute the unit tests via [Jest](https://jestjs.io).
 
 

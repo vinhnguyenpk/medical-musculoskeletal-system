@@ -1,6 +1,6 @@
-# @utx/context
+# @medical-musculoskeletal/context
 
-`@utx/context` is a lightweight and reusable module designed to help manage and isolate context data in asynchronous operations, such as web server request handling. It is part of a monorepo and can be easily integrated into other libraries or applications within the monorepo.
+`@medical-musculoskeletal/context` is a lightweight and reusable module designed to help manage and isolate context data in asynchronous operations, such as web server request handling. It is part of a monorepo and can be easily integrated into other libraries or applications within the monorepo.
 
 ## Overview
 
@@ -8,12 +8,12 @@ The Context Manager provides a simple and consistent API to store and retrieve c
 
 ## Usage
 
-Here is an example of how to use the @utx/context module in an Express application:
+Here is an example of how to use the @medical-musculoskeletal/context module in an Express application:
 
 
 ```typescript
 import express, { Request } from 'express';
-import { ContextMiddleware } from '@utx/context';
+import { ContextMiddleware } from '@medical-musculoskeletal/context';
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.listen(3000, () => {
 
 ```
 
-In this example, the `ContextMiddleware` from `@utx/context` is used to create a request context for each incoming request. The context can be accessed via req.ctx and is isolated from other requests.
+In this example, the `ContextMiddleware` from `@medical-musculoskeletal/context` is used to create a request context for each incoming request. The context can be accessed via req.ctx and is isolated from other requests.
 
 ## API
 
@@ -51,7 +51,7 @@ To use the `ContextMiddleware`, simply add it to your Express application:
 
 ```javascript
 import express, { Request } from 'express';
-import { ContextMiddleware } from '@utx/context';
+import { ContextMiddleware } from '@medical-musculoskeletal/context';
 
 const app = express();
 

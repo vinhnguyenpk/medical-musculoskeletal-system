@@ -1,27 +1,23 @@
 {
-  "name": "utx-logger",
+  "name": "medical-musculoskeletal-logger",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/utx-logger/src",
+  "sourceRoot": "packages/medical-musculoskeletal-logger/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "packages/utx-logger/**/*.ts"
-        ]
+        "lintFilePatterns": ["packages/medical-musculoskeletal-logger/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "{workspaceRoot}/coverage/packages/utx-logger"
+        "{workspaceRoot}/coverage/packages/medical-musculoskeletal-logger"
       ],
       "options": {
-        "jestConfig": "packages/utx-logger/jest.config.ts",
+        "jestConfig": "packages/medical-musculoskeletal-logger/jest.config.ts",
         "passWithNoTests": true
       }
     }
