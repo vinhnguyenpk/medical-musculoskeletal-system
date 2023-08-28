@@ -20,9 +20,7 @@
     "strict": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@@/*": [
-        "./src/.umi/*"
-      ]
+      "@@/*": ["./src/.umi/*"]
     }
   },
   "include": [
@@ -37,8 +35,6 @@
     ".prettierrc.js",
     "jest.config.js"
   ],
-  "files": [
-    "src/**/*",
-  ],
+  "files": ["src/**/*"],
   "exclude": ["**/node_modules", "build", "dist", "scripts", "src/.umi/*", "webpack", "jest"]
 }

@@ -1,15 +1,15 @@
-import { Settings as LayoutSettings } from "@ant-design/pro-layout";
+import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 
 export default {
   antd: {
-    componentSize: "small",
+    componentSize: 'small',
   },
-  navTheme: "dark",
-  logo: "",
-  primaryColor: "#096dd9",
-  layout: "side",
+  navTheme: 'dark',
+  logo: '',
+  primaryColor: '#096dd9',
+  layout: 'side',
   headerHeight: 54,
-  contentWidth: "Fluid",
+  contentWidth: 'Fluid',
   fixedHeader: true,
   fixSiderbar: true,
   // colorWeak: false,
@@ -18,9 +18,9 @@ export default {
   menu: {
     locale: false,
   },
-  title: "",
+  title: '',
   pwa: true,
-  iconfontUrl: "",
+  iconfontUrl: '',
 } as LayoutSettings & {
   pwa: boolean;
 };

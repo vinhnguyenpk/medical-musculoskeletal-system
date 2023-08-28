@@ -1,9 +1,12 @@
-@import '~antd/es/style/themes/default.less';
-
 html,
 body,
 #root {
   height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 }
 
 .colorWeak {
@@ -12,6 +15,9 @@ body,
 
 .ant-layout {
   min-height: 100vh;
+}
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
 }
 
 canvas {
@@ -29,50 +35,7 @@ ol {
   list-style: none;
 }
 
-#root .ant-descriptions-item-label {
-  color: #aaa;
-}
-.operatorList {
-  // display: flex;
-  // flex-wrap: wrap;
-  // .ant-space-item {
-  //   width: 40%;
-  //   margin-right: 10% !important;
-  //   word-wrap: break-word;
-  // }
-  // .ant-form-item {
-  //   display: flex;
-  //   flex-wrap: nowrap;
-  // }
-  // .ant-form-item-label {
-  //   white-space: normal;
-  // }
-  // .ant-form-item,
-  // .ant-form-item-label > label {
-  //   width: 100%;
-  //   text-align: left;
-  // }
-  // .ant-form-item-label > label {
-  //   height: auto;
-  //   padding-right: 20px;
-  //   line-height: 32px;
-  // }
-  // .ant-form-item-label > label::after {
-  //   position: absolute;
-  //   top: 0;
-  //   right: 0;
-  // }
-}
-.formAmountContainer {
-  .ant-input-group.ant-input-group-compact {
-    display: flex;
-    .ant-form-item:first-child {
-      flex: 1;
-    }
-  }
-}
-
-@media (max-width: @screen-xs) {
+@media (max-width: 768px) {
   .ant-table {
     width: 100%;
     overflow-x: auto;
@@ -87,26 +50,4 @@ ol {
       }
     }
   }
-}
-
-// 兼容IE11
-@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
-  body .ant-design-pro > .ant-layout {
-    min-height: 100vh;
-  }
-}
-.alternatives-list {
-  .ant-table-fixed {
-    table-layout: fixed;
-  }
-
-  .ant-table-tbody > tr > td {
-    word-wrap: break-word;
-    word-break: break-all;
-  }
-}
-
-@page {
-  size: auto;
-  margin: 10mm;
 }
