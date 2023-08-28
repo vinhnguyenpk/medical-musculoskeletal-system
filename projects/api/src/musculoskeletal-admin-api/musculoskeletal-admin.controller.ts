@@ -1,6 +1,6 @@
+import { exceptions } from "@medical-musculoskeletal/logger";
 import { Controller, Get, HttpException, Param, Query } from "@nestjs/common";
 import { ApiBearerAuth, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
-import { exceptions } from "../lib/logger";
 import { MusculoskeletalService } from "../musculoskeletal/musculoskeletal.service";
 
 @ApiTags("Musculoskeletal")

@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "✨ medical-musculoskeletal-system-root",
+      "path": "."
+    },
+    {
+      "name": "🚀 api",
+      "path": "projects/api"
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "git.ignoreLimitWarning": true,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "monorepoWorkspace.folders.regex.apps": "^app|web|api|frontend|backend|projects",
+    "monorepoWorkspace.folders.regex.libs": "^common|packages|lib|private"
+  }
+}
