@@ -5,9 +5,19 @@ import { AppController } from "./app.controller";
 import { CoreModule } from "./core/core.module";
 import { HttpRequestIdMiddleware } from "./http-x-request-id.middleware";
 import { MusculoskeletalApiModule } from "./musculoskeletal-api/musculoskeletal.module";
+import { CategoryAdminApiModule } from "./category-admin-api/category-admin.module";
+import { CategoryApiModule } from "./category-api/category.module";
+import { PostAdminApiModule } from "./posts-admin-api/post-admin.module";
+import { PostApiModule } from "./posts-api/post.module";
+import { MusculoskeletalAdminApiModule } from "./musculoskeletal-admin-api/musculoskeletal-admin.module";
 
 @Module({
-  imports: [CoreModule, MusculoskeletalApiModule],
+  imports: [
+    CoreModule,
+    MusculoskeletalApiModule,
+    CategoryApiModule,
+    PostApiModule,
+  ],
   controllers: [AppController],
   providers: [
     // ThrottlerModule.forRootAsync({
