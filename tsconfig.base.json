@@ -12,23 +12,33 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "module": "CommonJS",
-    "lib": ["es2022", "dom"],
+    "lib": [
+      "es2022",
+      "dom"
+    ],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["projects/api/src/*"],
-      "@medical-musculoskeletal/logger": [
-        "packages/medical-musculoskeletal-logger/src/index.ts"
+      "@/*": [
+        "projects/api/src/*"
       ],
       "@medical-musculoskeletal/context": [
         "packages/medical-musculoskeletal-context/src/index.ts"
+      ],
+      "@medical-musculoskeletal/logger": [
+        "packages/medical-musculoskeletal-logger/src/index.ts"
       ]
     }
   },
-  "exclude": ["**/node_modules", "tmp"]
+  "exclude": [
+    "**/node_modules",
+    "tmp"
+  ]
 }

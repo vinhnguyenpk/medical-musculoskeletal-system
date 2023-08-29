@@ -3,7 +3,7 @@
   "npmScope": "api",
   "tasksRunnerOptions": {
     "nx-cloud": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "OTY2MDg2YjAtNmU5YS00YmUwLTg1ZTItNjQwZDk3MTljZWYzfHJlYWQtd3JpdGU="
@@ -36,7 +36,7 @@
     }
   },
   "generators": {
-    "@nrwl/react": {
+    "@nx/react": {
       "application": {
         "style": "less",
         "linter": "eslint",
@@ -69,7 +69,7 @@
   },
   "defaultProject": "api",
   "pluginsConfig": {
-    "@nrwl/js": {
+    "@nx/js": {
       "analyzeSourceFiles": true
     }
   },
