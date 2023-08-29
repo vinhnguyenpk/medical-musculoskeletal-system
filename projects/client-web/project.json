@@ -1,78 +1,84 @@
 {
   "name": "client-web",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "projects/client-web/src",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "projects/client-web/src",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
-        "compiler": "babel",
-        "outputPath": "dist/projects/client-web",
+        "outputPath": "dist/client-web",
         "index": "projects/client-web/src/index.html",
-        "baseHref": "/",
-        "main": "projects/client-web/src/main.tsx",
+        "main": "projects/client-web/src/main.ts",
+        "polyfills": ["zone.js"],
         "tsConfig": "projects/client-web/tsconfig.app.json",
         "assets": [
           "projects/client-web/src/favicon.ico",
           "projects/client-web/src/assets"
         ],
-        "styles": ["projects/client-web/src/styles.less"],
-        "scripts": [],
-        "isolatedConfig": true,
-        "webpackConfig": "projects/client-web/webpack.config.js"
+        "styles": ["projects/client-web/src/styles.scss"],
+        "scripts": []
       },
       "configurations": {
-        "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
         "production": {
-          "fileReplacements": [
+          "budgets": [
             {
-              "replace": "projects/client-web/src/environments/environment.ts",
-              "with": "projects/client-web/src/environments/environment.prod.ts"
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
             }
           ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/webpack:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "client-web:build",
-        "hmr": true
-      },
+      "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
-        "development": {
-          "buildTarget": "client-web:build:development"
-        },
         "production": {
-          "buildTarget": "client-web:build:production",
-          "hmr": false
+          "browserTarget": "client-web:build:production"
+        },
+        "development": {
+          "browserTarget": "client-web:build:development"
         }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "client-web:build"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["projects/client-web/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "projects/client-web/**/*.ts",
+          "projects/client-web/**/*.html"
+        ]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "projects/client-web/jest.config.ts",
@@ -85,6 +91,5 @@
         }
       }
     }
-  },
-  "tags": []
+  }
 }
