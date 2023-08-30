@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { CategoryController } from "./category.controller";
-import { CategoryModule } from "../category/category.module";
+import { Module } from '@nestjs/common';
+import { CategoryModule } from '../category/category.module';
+import { CategoryController } from './category.controller';
 
 @Module({
   imports: [CategoryModule],
-  controllers: [CategoryController],
+  controllers: [CategoryController]
 })
 export class CategoryApiModule {}

@@ -1,26 +1,26 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity("category")
+@Entity('category')
 export class Category {
-  @PrimaryColumn("uuid")
+  @PrimaryColumn('uuid')
   id: string;
 
-  @Column({ name: "name", type: "text" })
+  @Column({ name: 'name', type: 'text' })
   name: string;
 
   @Column({
-    name: "created_at",
-    type: "timestamptz",
+    name: 'created_at',
+    type: 'timestamptz',
     nullable: false,
-    default: () => "now()",
+    default: () => 'now()'
   })
   createdAt: Date;
 
   @Column({
-    name: "updated_at",
-    type: "timestamptz",
+    name: 'updated_at',
+    type: 'timestamptz',
     nullable: true,
-    onUpdate: "now()",
+    onUpdate: 'now()'
   })
   updatedAt: Date;
 }

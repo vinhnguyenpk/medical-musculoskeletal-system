@@ -1,5 +1,5 @@
-import { Category } from "@/category/category.entity";
-import { ApiProperty } from "@nestjs/swagger";
+import { Category } from '@/category/category.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class GetStoryRequest {
   @ApiProperty()
