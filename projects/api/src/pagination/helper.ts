@@ -1,5 +1,5 @@
-import { SelectQueryBuilder } from "typeorm";
-import { PaginatedList } from "./types";
+import { SelectQueryBuilder } from 'typeorm';
+import { PaginatedList } from './types';
 
 export async function paginate<T>(
   query: SelectQueryBuilder<T>,
@@ -13,6 +13,6 @@ export async function paginate<T>(
   const data = query.limit(pageSize).offset(offset);
   return {
     total,
-    data: opts?.raw ? await data.getRawMany() : await data.getMany(),
+    data: opts?.raw ? await data.getRawMany() : await data.getMany()
   };
 }
