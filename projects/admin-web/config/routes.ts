@@ -63,4 +63,9 @@ export default [
     path: '/list',
     component: './TableList',
   },
+  {
+    path: '*',
+    layout: false,
+    component: './404',
+  },
 ];
