@@ -1,23 +1,14 @@
-import { ContextMiddleware } from "@medical-musculoskeletal/context";
-import { LoggerMiddleware } from "@medical-musculoskeletal/logger";
-import { MiddlewareConsumer, Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { CoreModule } from "./core/core.module";
-import { HttpRequestIdMiddleware } from "./http-x-request-id.middleware";
-import { MusculoskeletalApiModule } from "./musculoskeletal-api/musculoskeletal.module";
-import { CategoryAdminApiModule } from "./category-admin-api/category-admin.module";
-import { CategoryApiModule } from "./category-api/category.module";
-import { StoryAdminApiModule } from "./story-admin-api/story-admin.module";
-import { StoryApiModule } from "./story-api/story.module";
-import { MusculoskeletalAdminApiModule } from "./musculoskeletal-admin-api/musculoskeletal-admin.module";
+import { ContextMiddleware } from '@medical-musculoskeletal/context';
+import { LoggerMiddleware } from '@medical-musculoskeletal/logger';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { CategoryApiModule } from './category-api/category.module';
+import { CoreModule } from './core/core.module';
+import { HttpRequestIdMiddleware } from './http-x-request-id.middleware';
+import { StoryApiModule } from './story-api/story.module';
 
 @Module({
-  imports: [
-    CoreModule,
-    MusculoskeletalApiModule,
-    CategoryApiModule,
-    StoryApiModule,
-  ],
+  imports: [CoreModule, CategoryApiModule, StoryApiModule],
   controllers: [AppController],
   providers: [
     // ThrottlerModule.forRootAsync({
@@ -39,12 +30,10 @@ import { MusculoskeletalAdminApiModule } from "./musculoskeletal-admin-api/muscu
     //   provide: APP_GUARD,
     //   useClass: AuthGuard,
     // },
-  ],
+  ]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(ContextMiddleware(), HttpRequestIdMiddleware(), LoggerMiddleware)
-      .forRoutes("*");
+    consumer.apply(ContextMiddleware(), HttpRequestIdMiddleware(), LoggerMiddleware).forRoutes('*');
   }
 }
