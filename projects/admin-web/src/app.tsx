@@ -43,6 +43,7 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   menuData?: MenuDataItem[];
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  fetchRuntimeConfig: () => Promise<void>;
 }> {
   const fetchUserInfo = async () => {
     try {
@@ -55,24 +56,73 @@ export async function getInitialState(): Promise<{
     }
     return undefined;
   };
+
+  const fetchRuntimeConfig = async () => {
+    return fetch(`/env.json`, {
+      method: 'GET',
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json().catch((r) => null);
+        } else {
+          return null;
+        }
+      })
+      .then((env) => {
+        let e = null;
+
+        if (env) {
+          e = env;
+        } else {
+          e = {
+            ADMIN_API_URL: ADMIN_API_URL,
+          };
+        }
+        window['env'] = e;
+        return e;
+      });
+  };
+
+  const menuData = [
+    {
+      path: '/category',
+      name: 'Category',
+      icon: 'smile',
+    },
+    {
+      path: '/story',
+      name: 'Story',
+      icon: 'smile',
+    },
+  ];
+
+  await fetchRuntimeConfig();
   // 如果不是登录页面，执行
   const { location } = history;
-  if (location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings as Partial<LayoutSettings>,
-    };
-  }
+
+  // if (location.pathname !== loginPath) {
+  //   // const currentUser = await fetchUserInfo();
+  //   return {
+  //     // fetchUserInfo,
+  //     // currentUser,
+  //     menuData,
+  //     settings: defaultSettings as Partial<LayoutSettings>,
+  //   };
+  // }
   return {
     fetchUserInfo,
+    menuData,
     settings: defaultSettings as Partial<LayoutSettings>,
   };
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+export const layout = ({
+  initialState,
+}: {
+  initialState: any;
+  children: any;
+}): RunTimeLayoutConfig => {
   notification.config({
     getContainer: () => document.getElementById('notification')!,
   });
@@ -95,9 +145,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       const currentUser = initialState?.currentUser;
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!currentUser?.userid && location.pathname !== loginPath) {
-        history.push(loginPath);
-      }
+      // if (!currentUser?.userid && location.pathname !== loginPath) {
+      history.push(location.pathname);
+      // }
     },
     logo: null,
     menuHeaderRender: () => {
@@ -134,7 +184,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 
       return defaultDom;
     },
-    navTheme: 'realDark',
+    navTheme: 'light',
     ...initialState?.settings,
   };
 };

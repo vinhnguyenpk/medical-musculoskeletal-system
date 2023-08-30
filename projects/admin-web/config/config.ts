@@ -14,6 +14,9 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
+  define: {
+    ADMIN_API_URL: process.env.ADMIN_API_URL,
+  },
 
   /**
    * @name 兼容性设置

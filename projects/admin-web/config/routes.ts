@@ -29,6 +29,18 @@ export default [
     component: './Welcome',
   },
   {
+    path: '/category',
+    name: 'category',
+    icon: 'smile',
+    component: './category/index.tsx',
+  },
+  {
+    path: '/story',
+    name: 'story',
+    icon: 'smile',
+    component: './story/index.tsx',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
@@ -50,14 +62,5 @@ export default [
     icon: 'table',
     path: '/list',
     component: './TableList',
-  },
-  {
-    path: '/',
-    redirect: '/welcome',
-  },
-  {
-    path: '*',
-    layout: false,
-    component: './404',
   },
 ];
