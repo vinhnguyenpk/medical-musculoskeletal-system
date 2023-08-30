@@ -1,7 +1,10 @@
-import { Category } from "@/category/category.entity";
-import { ApiProperty } from "@nestjs/swagger";
+import { Category } from '@/category/category.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class AdminCreateStoryParams {
+  @ApiProperty()
+  title: string;
+
   @ApiProperty({ required: false })
   keywords: string;
 
@@ -15,6 +18,12 @@ export class AdminCreateStoryParams {
 export class AdminCreateStoryResponse {
   @ApiProperty()
   id: string;
+
+  @ApiProperty()
+  title: string;
+
+  @ApiProperty()
+  shortContent: string;
 
   @ApiProperty()
   keywords?: string;
@@ -33,6 +42,9 @@ export class AdminCreateStoryResponse {
 }
 
 export class AdminUpdateStoryParams {
+  @ApiProperty()
+  title: string;
+
   @ApiProperty({ required: false })
   keywords: string;
 
@@ -46,6 +58,12 @@ export class AdminUpdateStoryParams {
 export class AdminUpdateStoryResponse {
   @ApiProperty()
   id: string;
+
+  @ApiProperty()
+  title: string;
+
+  @ApiProperty()
+  shortContent: string;
 
   @ApiProperty()
   keywords?: string;
@@ -65,6 +83,12 @@ export class AdminUpdateStoryResponse {
 
 export class AdminGetStoryRequest {
   @ApiProperty()
+  title?: string;
+
+  @ApiProperty()
+  shortContent?: string;
+
+  @ApiProperty()
   categoryId?: string;
 
   @ApiProperty()
@@ -83,6 +107,12 @@ export class AdminGetStoryRequest {
 export class AdminGetStoryResponse {
   @ApiProperty()
   id: string;
+
+  @ApiProperty()
+  title: string;
+
+  @ApiProperty()
+  shortContent: string;
 
   @ApiProperty()
   category: Category;

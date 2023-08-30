@@ -1,19 +1,11 @@
-import { Injectable, NotAcceptableException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { Category } from "./category.entity";
-import {
-  CategoryDto,
-  CreateCategoryParams,
-  UpdateCategoryParams,
-} from "./category.dto";
-import {
-  AdminCreateCategoryParams,
-  AdminGetCategoryRequest,
-  AdminUpdateCategoryParams,
-} from "../category-admin-api/category-admin.view";
-import { paginate } from "../pagination/helper";
-import { PaginatedList } from "../pagination/types";
+import { Injectable, NotAcceptableException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { AdminGetCategoryRequest } from '../category-admin-api/category-admin.view';
+import { paginate } from '../pagination/helper';
+import { PaginatedList } from '../pagination/types';
+import { CategoryDto, CreateCategoryParams, UpdateCategoryParams } from './category.dto';
+import { Category } from './category.entity';
 
 @Injectable()
 export class CategoryService {
@@ -26,16 +18,14 @@ export class CategoryService {
     return this.categoryRepo;
   }
 
-  public async getAll(
-    request: AdminGetCategoryRequest
-  ): Promise<PaginatedList<CategoryDto>> {
-    const query = this.categoryRepo.createQueryBuilder("c");
+  public async getAll(request: AdminGetCategoryRequest): Promise<PaginatedList<CategoryDto>> {
+    const query = this.categoryRepo.createQueryBuilder('c');
     if (request.name) {
-      query.andWhere("c.name LIKE :name", { name: `%${request.name}%` });
+      query.andWhere('c.name LIKE :name', { name: `%${request.name}%` });
     }
     return await paginate(query, {
       current: request.current,
-      pageSize: request.pageSize,
+      pageSize: request.pageSize
     });
   }
 
@@ -52,17 +42,14 @@ export class CategoryService {
     return category;
   }
 
-  public async updateCategory(
-    id: string,
-    params: UpdateCategoryParams
-  ): Promise<Category> {
+  public async updateCategory(id: string, params: UpdateCategoryParams): Promise<Category> {
     const category = await this.categoryRepo.findOneOrFail({
       where: {
-        id,
-      },
+        id
+      }
     });
     if (!category) {
-      throw new NotAcceptableException("Category not found");
+      throw new NotAcceptableException('Category not found');
     }
 
     category.name = params.name;
