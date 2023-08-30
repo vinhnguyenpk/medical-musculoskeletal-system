@@ -4,6 +4,8 @@ import { request } from 'umi';
 
 export interface Story {
   id: string;
+  title: string;
+  shortContent: string;
   content: string;
   keywords: string;
   category: Category;
@@ -12,6 +14,7 @@ export interface Story {
 }
 
 export interface AdminGetListStoryParams {
+  title?: string;
   content?: string;
   keywords?: string;
   categoryId?: string;
@@ -20,6 +23,7 @@ export interface AdminGetListStoryParams {
 }
 
 export interface AdminCreateStoryParams {
+  title: string;
   keywords: string;
   categoryId: string;
   content: string;
@@ -27,6 +31,7 @@ export interface AdminCreateStoryParams {
 
 export interface AdminUpdateStoryParams {
   id: string;
+  title: string;
   keywords: string;
   categoryId: string;
   content: string;
@@ -52,6 +57,7 @@ export async function updateStory(data: AdminUpdateStoryParams): Promise<AdminUp
   return await request<AdminUpdateStoryResponse>(`/story/${data.id}/edit`, {
     method: 'post',
     data: {
+      title: data.title,
       keywords: data.keywords,
       categoryId: data.categoryId,
       content: data.content,
@@ -63,6 +69,7 @@ export async function createStory(data: AdminCreateStoryParams): Promise<AdminCr
   return await request<AdminCreateStoryResponse>(`/story/create`, {
     method: 'post',
     data: {
+      title: data.title,
       keywords: data.keywords,
       categoryId: data.categoryId,
       content: data.content,

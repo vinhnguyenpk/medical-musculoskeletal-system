@@ -4,7 +4,7 @@ export default {
   antd: {
     componentSize: 'small',
   },
-  navTheme: 'dark',
+  navTheme: 'light',
   logo: '',
   primaryColor: '#096dd9',
   layout: 'side',
