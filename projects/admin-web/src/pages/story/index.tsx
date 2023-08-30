@@ -113,7 +113,7 @@ const StoryList = () => {
         {creating && (
           <StoryForm
             onClose={() => setCreating(false)}
-            onFinish={async () => {
+            onFinish={() => {
               setCreating(false);
               notification.success({
                 message: 'Story created successfully',
@@ -128,7 +128,7 @@ const StoryList = () => {
         {editStory && (
           <StoryForm
             onClose={() => setEditStory(null)}
-            onFinish={async () => {
+            onFinish={() => {
               setEditStory(null);
               notification.success({
                 message: 'Story updated successfully',

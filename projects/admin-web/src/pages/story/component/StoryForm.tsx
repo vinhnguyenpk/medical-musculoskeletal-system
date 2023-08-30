@@ -6,8 +6,8 @@ import React from 'react';
 import { useRequest } from 'umi';
 
 type Props = {
-  onFinish: () => any;
-  onClose: () => any;
+  onFinish: () => void;
+  onClose: () => void;
   mode: 'new' | 'edit';
   initialValues?: Story;
 };
@@ -50,8 +50,6 @@ export const StoryForm = (props: Props) => {
         id="story-form"
         layout="vertical"
         onFinish={async (values) => {
-          delete values['clientDocumentSearch'];
-
           switch (mode) {
             case 'new':
               await runCreate(values);

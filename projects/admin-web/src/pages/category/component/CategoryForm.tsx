@@ -4,8 +4,8 @@ import React from 'react';
 import { useRequest } from 'umi';
 
 type Props = {
-  onFinish: () => any;
-  onClose: () => any;
+  onFinish: () => void;
+  onClose: () => void;
   mode: 'new' | 'edit';
   initialValues?: Category;
 };

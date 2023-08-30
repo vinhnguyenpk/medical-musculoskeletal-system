@@ -88,7 +88,7 @@ const CategoryList = () => {
         {creating && (
           <CategoryForm
             onClose={() => setCreating(false)}
-            onFinish={async () => {
+            onFinish={() => {
               setCreating(false);
               notification.success({
                 message: 'Category created successfully',
@@ -103,7 +103,7 @@ const CategoryList = () => {
         {editCategory && (
           <CategoryForm
             onClose={() => setEditCategory(null)}
-            onFinish={async () => {
+            onFinish={() => {
               setEditCategory(null);
               notification.success({
                 message: 'Category updated successfully',

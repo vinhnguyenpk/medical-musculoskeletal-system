@@ -5,7 +5,7 @@ import { request, useRequest } from 'umi';
 const Option = Select.Option;
 
 export type Props = {
-  value?: string | string[];
+  value?: string | null | undefined;
   multiple?: boolean;
   onChange?: (
     value: string,
@@ -45,7 +45,7 @@ export const CategorySelect = (props: Props) => {
       mode={multiple ? 'multiple' : undefined}
       placeholder="Select Category"
       notFoundContent={loading ? <Spin size="small" /> : null}
-      value={props.value as any}
+      value={props.value}
       filterOption={false}
       onSearch={debounce(setSearchText, debounceInterval)}
       onChange={onChange}
