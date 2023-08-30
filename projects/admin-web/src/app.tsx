@@ -85,6 +85,11 @@ export async function getInitialState(): Promise<{
 
   const menuData = [
     {
+      path: '/',
+      name: 'Home',
+      icon: 'smile',
+    },
+    {
       path: '/category',
       name: 'Category',
       icon: 'smile',
